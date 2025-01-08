@@ -1,0 +1,24 @@
+-- Parent: TextButton inside a ScreenGui
+local button = script.Parent
+local crewmate = game.Workspace.Crewmate -- Replace with the path to your crewmate part/model
+
+-- Crewmate colors
+local colors = {"Bright red", "Bright blue", "Bright yellow", "Bright green", "Bright orange", "Bright violet"}
+
+-- Function to change the crewmate's color
+local function changeCrewmateColor()
+    if crewmate:IsA("Part") then
+        crewmate.BrickColor = BrickColor.new(colors[math.random(1, #colors)])
+    elseif crewmate:IsA("Model") then
+        for _, part in ipairs(crewmate:GetChildren()) do
+            if part:IsA("Part") then
+                part.BrickColor = BrickColor.new(colors[math.random(1, #colors)])
+            end
+        end
+    end
+end
+
+-- Button click event
+button.MouseButton1Click:Connect(function()
+    changeCrewmateColor()
+end)
